@@ -8,7 +8,7 @@
         // Display all samples
 
 // Display sample metadata (individuals demographic info)
-    // Find the html element to append a list of information
+    // Find the html element to append values of information 
 // Make a change function
     // repopulates the info pulled on a new ID
     // Updates the chart
@@ -28,7 +28,7 @@ d3.json("samples.json").then((data) => {
         option = dropdown.append("option").text(namesDataset[i])
     };
 
-    showBars(namesDataset[0]);
+    showGraphs(namesDataset[0]);
     showPanel(namesDataset[0]);
 })
 
@@ -52,12 +52,11 @@ function showPanel(name) {
 function optionChanged() {
     var name = d3.select("#selDataset").node().value;
     console.log(name);
-    showBars(name);
+    showGraphs(name);
     showPanel(name);
-    
-
 }
-function showBars(name) {
+//When an ID is selected, filter all data to show graphs relating to that ID
+function showGraphs(name) {
     d3.json("samples.json").then((data) => {
         var sample = data.samples.filter(obj => obj.id ==name)[0];
 
@@ -76,6 +75,28 @@ function showBars(name) {
         }
 
         Plotly.newPlot("bar", barData, layout);
+
+        var bubbleData = [{
+            x: sample.otu_ids,
+            y: sample.sample_values,
+            mode: "markers",
+            marker: {
+                size: sample.sample_values,
+                color: sample.otu_ids
+            },
+            text: sample.otu_labels
+        
+        }];
+        
+        // set the layout for the bubble plot
+        var layout2 = {
+            xaxis:{title: "OTU ID"},
+            height: 600,
+            width: 1000
+        };
+    
+        
+        // create the bubble plot
+        Plotly.newPlot("bubble", bubbleData, layout2); 
     })
 }
-
