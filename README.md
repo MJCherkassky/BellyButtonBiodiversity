@@ -5,7 +5,7 @@ The dataset reveals that a small handful of microbial species (also called opera
 
 This interactive webpage shows test subject demographic info and top 10 OTU's.
 
-![ static image](Images\BBBDiversity.PNG?raw=true "Static View")
+![static image](Images\BBBDiversity.PNG)
 
 [View the dashboard on my deployed GitHub Pages](https://mjcherkassky.github.io/BellyButtonBiodiversity/StarterCode/ )
 
